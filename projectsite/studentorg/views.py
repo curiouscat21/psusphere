@@ -27,6 +27,13 @@ class OrganizationList(ListView):
 
     def get_queryset(self, *args, **kwargs):
         qs = super(OrganizationList, self).get_queryset(*args, **kwargs)
+        query = self.request.GET.get('q', '')
+        if query:
+            qs = qs.filter(
+                Q(name__icontains=query) |
+                Q(college__college_name__icontains=query) |
+                Q(description__icontains=query)
+            )
         return qs
 
 class OrganizationCreateView(CreateView):
@@ -55,18 +62,18 @@ class OrgMemberList(ListView):
     paginate_by = 5
 
     def get_queryset(self, *args, **kwargs):
-        qs = super(OrgMemberList, self).get_queryset(*args, **kwargs)
-        if self.request.GET.get("q") is not None:
-            query = self.request.GET.get('q')
-            qs = qs.filter(
-                Q(student__first_name__icontains=query) | 
-                Q(student__last_name__icontains=query) |
-                Q(organization__name__icontains=query) |
-                Q(student__college__college_name__icontains=query)
-                )
-                
-        return qs
+        qs = super(OrgMemberList, self).get_queryset(*args, **kwargs).select_related('student', 'organization', 'student__program')
 
+        query = self.request.GET.get('q', '')
+        if query:
+            qs = qs.filter(
+                Q(student__firstname__icontains=query) |  
+                Q(student__lastname__icontains=query) |  
+                Q(organization__name__icontains=query) |
+                Q(student__program__college__college_name__icontains=query)  
+            )
+
+        return qs
 class OrgMemberCreateView(CreateView):
     model = OrgMember
     form_class = OrgMemberForm
@@ -93,7 +100,11 @@ class CollegeList(ListView):
     
     def get_queryset(self, *args, **kwargs):
         qs = super(CollegeList, self).get_queryset(*args, **kwargs)
+        if self.request.GET.get("q") is not None:
+            query = self.request.GET.get('q')
+            qs = qs.filter(college_name__icontains=query)
         return qs
+         
 
 class CollegeCreateView(CreateView):
     model = College
@@ -121,8 +132,13 @@ class ProgramList(ListView):
     
     def get_queryset(self, *args, **kwargs):
         qs = super(ProgramList, self).get_queryset(*args, **kwargs)
+        query = self.request.GET.get('q', '')
+        if query:
+            qs = qs.filter(
+                Q(prog_name__icontains=query) |
+                Q(college__college_name__icontains=query)
+            )
         return qs
-
 class ProgramCreateView(CreateView):
     model = Program
     form_class = ProgramForm
@@ -149,8 +165,15 @@ class StudentList(ListView):
     
     def get_queryset(self, *args, **kwargs):
         qs = super(StudentList, self).get_queryset(*args, **kwargs)
+        query = self.request.GET.get('q', '')
+        if query:
+            qs = qs.filter(
+                Q(lastname__icontains=query) |
+                Q(firstname__icontains=query) |
+                Q(student_id__icontains=query) |
+                Q(program__college__college_name__icontains=query)
+            )
         return qs
-
 class StudentCreateView(CreateView):
     model = Student
     form_class = StudentForm
