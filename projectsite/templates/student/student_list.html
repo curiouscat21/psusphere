@@ -1,4 +1,26 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+<h1>Student List</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Program</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.program.name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'home' %}" class="btn btn-secondary">Back to Dashboard</a>
 <div class="content">
   <div class="container-fluid">
     <h4 class="page-title">Students</h4>
