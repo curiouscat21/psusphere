@@ -14,7 +14,7 @@
     {% for message in messages %}
       // Create a new toast element
       const toastHTML = `
-      <div class="toast" role="alert" style="margin-bottom: 10px; background-color: skyblue;" data-bs-delay="3000">
+      <div class="toast" role="alert" style="margin-bottom: 10px; background-color: skyblue;" data-bs-delay="3000" data-bs-autohide="true">
           <div class="toast-header">
             <img src="{% static 'img/profile2.jpg' %}" class="rounded me-2" style="width: 25px; height: 25px;" alt="logo">
             <strong class="me-auto">PSU SPHERE</strong>
