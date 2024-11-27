@@ -3,14 +3,12 @@
   <div class="container-fluid">
     <h4 class="page-title">PSUSphere Dashboard</h4>
     <div class="row">
-      <!-- Radar Chart: Organization Participation by College -->
+      <!-- 1. Radar Chart: Organization Participation by College -->
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
             <div class="card-title">Organization Participation by College</div>
-            <div class="card-category">
-              Distribution of organizations across colleges
-            </div>
+            <div class="card-category">Distribution of organizations across colleges</div>
           </div>
           <div class="card-body">
             <div class="chart-container" style="height: 300px">
@@ -20,39 +18,22 @@
         </div>
       </div>
 
-      <!-- Bubble Chart: Student Distribution Across Programs -->
+      <!-- 2. Doughnut Chart: Program Distribution Across Colleges -->
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">Student Distribution Across Programs</div>
-            <div class="card-category">
-              Student count and organization membership by program
-            </div>
+            <div class="card-title">Program Distribution Across Colleges</div>
+            <div class="card-category">Number of programs per college</div>
           </div>
           <div class="card-body">
             <div class="chart-container" style="height: 300px">
-              <canvas id="bubbleChartStudentPrograms"></canvas>
+              <canvas id="doughnutProgramDistribution"></canvas>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Horizontal Bar Chart: Top 5 Organizations by Member Count -->
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">Top 5 Organizations by Member Count</div>
-            <div class="card-category">Most popular student organizations</div>
-          </div>
-          <div class="card-body">
-            <div class="chart-container" style="height: 300px">
-              <canvas id="horizontalBarTopOrgs"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Stacked Bar Chart: OrgMember Joining Trends by Semester -->
+      <!-- 3. Stacked Bar Chart: OrgMember Joining Trends -->
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
@@ -67,16 +48,31 @@
         </div>
       </div>
 
-      <!-- Doughnut Chart: Program Distribution Across Colleges -->
+      <!-- 4. Horizontal Bar Chart: Top 5 Organizations by Member Count -->
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">Program Distribution Across Colleges</div>
-            <div class="card-category">Number of programs per college</div>
+            <div class="card-title">Top 5 Organizations by Member Count</div>
+            <div class="card-category">Most popular student organizations</div>
           </div>
           <div class="card-body">
             <div class="chart-container" style="height: 300px">
-              <canvas id="doughnutProgramDistribution"></canvas>
+              <canvas id="horizontalBarTopOrgs"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Bubble Chart: Student Distribution Across Programs -->
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Student Distribution Across Programs</div>
+            <div class="card-category">Student count and organization membership by program</div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container" style="height: 300px">
+              <canvas id="bubbleChartStudentPrograms"></canvas>
             </div>
           </div>
         </div>
@@ -87,6 +83,18 @@
 {% endblock %} {% block chart %}
 <script>
   async function loadChartData() {
+    // Define a soft, pastel color palette
+    const colorPalette = {
+      softBlue: '#94B3FD',      // Soft blue
+      softPink: '#FEC8D8',      // Soft pink
+      softGreen: '#B5E6B5',     // Soft green
+      softYellow: '#FFDEB4',    // Soft yellow
+      softPurple: '#C7B0EA',    // Soft purple
+      softTeal: '#98D7C2',      // Soft teal
+      softPeach: '#FFBCBC',     // Soft peach
+      softLavender: '#E2C4FF'   // Soft lavender
+    };
+
     try {
       // Radar Chart: Organization Participation by College
       const radarResponse = await fetch("/radarChartOrgParticipation/");
@@ -102,12 +110,12 @@
             {
               label: "Organizations per College",
               data: radarData.values,
-              backgroundColor: "rgba(29, 122, 243, 0.2)",
-              borderColor: "#1d7af3",
-              pointBackgroundColor: "#1d7af3",
-              pointBorderColor: "#fff",
-              pointHoverBackgroundColor: "#fff",
-              pointHoverBorderColor: "#1d7af3",
+              backgroundColor: `${colorPalette.softBlue}66`,  // More transparent
+              borderColor: colorPalette.softBlue,
+              pointBackgroundColor: colorPalette.softBlue,
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: colorPalette.softBlue,
             },
           ],
         },
@@ -139,7 +147,7 @@
                 y: bubbleData.org_memberships[index],
                 r: Math.sqrt(bubbleData.student_counts[index]) * 2,
               })),
-              backgroundColor: "rgba(29, 122, 243, 0.6)",
+              backgroundColor: `${colorPalette.softTeal}99`,
             },
           ],
         },
@@ -186,9 +194,8 @@
             {
               label: "Member Count",
               data: barData.member_counts,
-              backgroundColor: "rgba(29, 122, 243, 0.6)",
-              borderColor: "#1d7af3",
-              borderWidth: 1,
+              backgroundColor: `${colorPalette.softPink}99`,
+              borderColor: colorPalette.softPink,
             },
           ],
         },
@@ -218,9 +225,8 @@
             {
               label: "New Members",
               data: stackedData.member_counts,
-              backgroundColor: "rgba(29, 122, 243, 0.6)",
-              borderColor: "#1d7af3",
-              borderWidth: 1,
+              backgroundColor: `${colorPalette.softPurple}99`,
+              borderColor: colorPalette.softPurple,
             },
           ],
         },
@@ -253,13 +259,14 @@
             {
               data: doughnutData.program_counts,
               backgroundColor: [
-                "#1d7af3",
-                "#f3545d",
-                "#fdaf4b",
-                "#59d05d",
-                "#00c0ef",
-                "#2779bd",
-                "#9561e2",
+                colorPalette.softBlue,
+                colorPalette.softPink,
+                colorPalette.softGreen,
+                colorPalette.softYellow,
+                colorPalette.softPurple,
+                colorPalette.softTeal,
+                colorPalette.softPeach,
+                colorPalette.softLavender
               ],
             },
           ],
