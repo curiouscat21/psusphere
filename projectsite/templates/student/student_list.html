@@ -1,13 +1,13 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <div class="content">
   <div class="container-fluid">
-    <h4 class="page-title">Programs</h4>
+    <h4 class="page-title">Students</h4>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">List of Programs</div>
-            <div class="card-category">Manage academic programs</div>
+            <div class="card-title">List of Students</div>
+            <div class="card-category">Manage student records</div>
           </div>
           <br />
           <div class="col-md-12 row">
@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-6">
               <div class="pull-right">
-                <a href="{% url 'program-add' %}" class="btn btn-success btn-rounded">Add Program</a>
+                <a href="{% url 'student-add' %}" class="btn btn-success btn-rounded">Add Student</a>
               </div>
             </div>
           </div>
@@ -36,25 +36,26 @@
                 <tr>
                   <th scope="col">Student ID</th>
                   <th scope="col">Student Name</th>
-                  <th scope="col">Program Name</th>
+                  <th scope="col">Program</th>
+                  <th scope="col">College</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                {% for object in object_list %}
+                {% for student in object_list %}
                 <tr>
-                    <td>{{ object.student_id }}</td>
-                    <td>{{ object.lastname }}, {{ object.firstname }}</td>
-                    <td>{{ object.program }}</td>
-                    <td>{{ object.college }}</td>
+                    <td>{{ student.student_id }}</td>
+                    <td>{{ student.lastname }}, {{ student.firstname }}</td>
+                    <td>{{ student.program }}</td>
+                    <td>{{ student.college }}</td>
                     <td>
-                    <a href="{% url 'program-update' object.id %}">Edit</a>
-                    <a href="{% url 'program-delete' object.id %}" class="text-danger">Delete</a>
-                  </td>
+                      <a href="{% url 'student-update' student.id %}">Edit</a>
+                      <a href="{% url 'student-delete' student.id %}" class="text-danger">Delete</a>
+                    </td>
                 </tr>
                 {% empty %}
                 <tr>
-                  <td colspan="3" style="text-align: center">
+                  <td colspan="5" style="text-align: center">
                     <p class="text-sm font-weight-bold mb-0">No Records Found</p>
                   </td>
                 </tr>
@@ -68,4 +69,5 @@
     </div>
   </div>
 </div>
+{% include "includes/messages.html" %}
 {% endblock %}

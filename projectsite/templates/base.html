@@ -1,12 +1,9 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="description" content="PSUSphere Dashboard">
 	<title>{% block title %}PSUSphere{% endblock %}</title>
-	<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -46,10 +43,10 @@
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#">Contact Us</a>
-								<a class="dropdown-item" href="https://github.com/curiouscat21/psusphere" target="_blank">
+								<a class="dropdown-item" href="https://github.com/anxiety16" target="_blank">
 									<img src="{% static 'img/github.jpg' %}" width="20" height="20" class="mr-2">GitHub
 								</a>
-								<a class="dropdown-item" href="mailto:202280185@psu.palawan.edu.ph">
+								<a class="dropdown-item" href="mailto:202280065@psu.palawan.edu.ph">
 									<img src="{% static 'img/gmail.jpg' %}" width="20" height="20" class="mr-2">Gmail
 								</a>
 							</div>
@@ -57,11 +54,11 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-bell"></i>
-								<span class="notification">3</span>
+								<span class="notification">4</span>
 							</a>
 							<ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
 								<li>
-									<div class="dropdown-title">You have 3 new notification</div>
+									<div class="dropdown-title">You have 4 new notification</div>
 								</li>
 								<li>
 									<div class="notif-center">
@@ -111,17 +108,14 @@
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> 
-								<img src="{% static 'img/wes.jpg' %}" alt="user-img" width="36" class="img-circle">
-								<span>CuriousCat</span>
-							</a>
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{% static 'img/wes.jpg' %}" alt="user-img" width="36" class="img-circle"><span >Anxiety</span></span> </a>
 							<ul class="dropdown-menu dropdown-user">
 								<li>
 									<div class="user-box">
 										<div class="u-img"><img src="{% static 'img/wes.jpg' %}" alt="user"></div>
 										<div class="u-text">
-											<h4>CuriousCat</h4>
-											<p class="text-muted">CuriousCat.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+											<h4>Anxiety</h4>
+											<p class="text-muted">Anxiety.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
 										</div>
 									</li>
 									<div class="dropdown-divider"></div>
@@ -151,7 +145,7 @@
 						<div class="info">
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									CuriousCat
+									Anxiety
 									<span class="user-level">Administrator</span>
 									<span class="caret"></span>
 								</span>
@@ -247,38 +241,42 @@
 			</div>
 		</div>
 	</div>
-	<script src="{% static 'js/core/jquery.3.2.1.min.js' %}"></script>
-	<script src="{% static 'js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
-	<script src="{% static 'js/core/popper.min.js' %}"></script>
-	<script src="{% static 'js/core/bootstrap.min.js' %}"></script>
-	<script src="{% static 'js/plugin/chartist/chartist.min.js' %}"></script>
-	<script src="{% static 'js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js' %}"></script>
-	<script src="{% static 'js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
-	<script src="{% static 'js/plugin/bootstrap-toggle/bootstrap-toggle.min.js' %}"></script>
-	<script src="{% static 'js/plugin/jquery-mapael/jquery.mapael.min.js' %}"></script>
-	<script src="{% static 'js/plugin/jquery-mapael/maps/world_countries.min.js' %}"></script>
-	<script src="{% static 'js/plugin/chart-circle/circles.min.js' %}"></script>
-	<script src="{% static 'js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
-	<script src="{% static 'js/ready.min.js' %}"></script>
-
-	<script>
-		const nav = document.querySelector(".navigation")
-		const currentUrl = window.location.href
-		const currentPage = currentUrl.split("/")[3]
-
-		const navItems = nav.querySelectorAll(".nav-item")
-
-		navItems.forEach(function (navItem) {
-			let navItemName = navItem.className.split(" ")[1]
-
-			if (navItemName === currentPage) {
-				navItem.classList.add("active")
-			}
-
-			if ((currentPage === "") && (navItemName === "home")) {
-				navItem.classList.add("active")
-			} 
-		})
-	</script>
 </body>
+<script src="{% static 'js/core/jquery.3.2.1.min.js' %}"></script>
+<script src="{% static 'js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/core/popper.min.js' %}"></script>
+<script src="{% static 'js/core/bootstrap.min.js' %}"></script>
+<!-- Add Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% block chart %}{% endblock %}
+<script src="{% static 'js/plugin/chartist/chartist.min.js' %}"></script>
+<script src="{% static 'js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js' %}"></script>
+<script src="{% static 'js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+<script src="{% static 'js/plugin/bootstrap-toggle/bootstrap-toggle.min.js' %}"></script>
+<script src="{% static 'js/plugin/jquery-mapael/jquery.mapael.min.js' %}"></script>
+<script src="{% static 'js/plugin/jquery-mapael/maps/world_countries.min.js' %}"></script>
+<script src="{% static 'js/plugin/chart-circle/circles.min.js' %}"></script>
+<script src="{% static 'js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
+<script src="{% static 'js/ready.min.js' %}"></script>
+
+<script>
+	const nav = document.querySelector(".navigation")
+	const currentUrl = window.location.href
+	const currentPage = currentUrl.split("/")[3]
+
+	const navItems = nav.querySelectorAll(".nav-item")
+
+	navItems.forEach(function (navItem) {
+		let navItemName = navItem.className.split(" ")[1]
+
+		if (navItemName === currentPage) {
+			navItem.classList.add("active")
+		}
+
+		if ((currentPage === "") && (navItemName === "home")) {
+			navItem.classList.add("active")
+		} 
+	})
+</script>
+
 </html>
